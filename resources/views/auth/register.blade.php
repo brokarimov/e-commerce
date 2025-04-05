@@ -64,14 +64,15 @@
                     <span class="text-danger">{{ $message }}</span>
                     @enderror
 
-                    <div class="row">
 
-                        <!-- /.col -->
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Register</button>
-                        </div>
-                        <!-- /.col -->
+
+                    <!-- /.col -->
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <a type="submit" class="btn btn-primary">Register</a>
+                        <a style="text-decoration: underline;" href="{{ route('login') }}">Login</a>
                     </div>
+                    <!-- /.col -->
+
                 </form>
 
 
