@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="col-12">
-    <h1>User Management</h1>
+    <h1>Product Management</h1>
 
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -18,37 +18,52 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create User</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create Product</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('user.store') }}" method="POST">
+                <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         @csrf
                         <label for="">Name</label>
                         <input type="text" name="name" placeholder="Name" class="form-control">
                         @error('name')
-                        <span class="text-danger">{{$message}}</span>
+                        <span class="text-danger">{{$message}}</span><br>
                         @enderror
 
-                        <label for="">Email</label>
-                        <input type="text" name="email" class="form-control" placeholder="email">
-                        @error('email')
-                        <span class="text-danger">{{$message}}</span>
+                        <label for="">Description</label>
+                        <input type="text" name="description" class="form-control" placeholder="Description">
+                        @error('description')
+                        <span class="text-danger">{{$message}}</span><br>
                         @enderror
 
-                        <label for="">Password</label>
-                        <input type="text" name="password" class="form-control" placeholder="Password">
-                        @error('password')
-                        <span class="text-danger">{{$message}}</span>
+                        <label for="">Count</label>
+                        <input type="text" name="count" class="form-control" placeholder="Count">
+                        @error('count')
+                        <span class="text-danger">{{$message}}</span><br>
                         @enderror
 
-                        <label for="">Role</label>
-                        <select name="role" class="form-control">
-                            <option value="">Select role (Optional)</option>
-                            <option value="user">User</option>
-                            <option value="admin">Admin</option>
+                        <label for="">Price</label>
+                        <input type="text" name="price" class="form-control" placeholder="Price">
+                        @error('price')
+                        <span class="text-danger">{{$message}}</span><br>
+                        @enderror
+
+                        <label for="">Image</label>
+                        <input type="file" name="image" class="form-control" placeholder="Image">
+                        @error('image')
+                        <span class="text-danger">{{$message}}</span><br>
+                        @enderror
+
+                        <label for="">Category</label>
+                        <select name="category_id" class="form-control">
+                            <option value="">Select Category</option>
+                            @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
                         </select>
-
+                        @error('category_id')
+                        <span class="text-danger">{{$message}}</span><br>
+                        @enderror
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -64,8 +79,8 @@
         <div class="card-header">
 
             <div style="display: flex; justify-content: space-between; align-items: center;">
-                <h1>Users</h1>
-                <form action="{{ route('user.search') }}" method="GET" class="d-flex">
+                <h1>Products</h1>
+                <form action="{{ route('product.search') }}" method="GET" class="d-flex">
                     <input
                         type="search"
                         name="name"
@@ -84,8 +99,8 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
+                        <th>Count</th>
+                        <th>Price</th>
                         <th>Status</th>
                         <th>Options</th>
                     </tr>
@@ -95,19 +110,19 @@
                     <tr>
                         <td>{{ $model->id }}</td>
                         <td>{{ $model->name }}</td>
-                        <td>{{ $model->email }}</td>
-                        <td>{{ $model->role }}</td>
+                        <td>{{ $model->count }}</td>
+                        <td>{{ $model->price }}</td>
                         <td>
                             @if ($model->status == 1)
-                            <a href="{{ route('user.status', $model->id) }}" class="btn btn-success">Block</a>
+                            <a href="{{ route('product.status', $model->id) }}" class="btn btn-success">Inactive</a>
                             @else
-                            <a href="{{ route('user.status', $model->id) }}" class="btn btn-danger">Unblock</a>
+                            <a href="{{ route('product.status', $model->id) }}" class="btn btn-danger">Active</a>
 
                             @endif
                         </td>
                         <td>
                             <div class="d-flex">
-                                <a href="{{ route('user.delete', $model->id) }}" class="btn btn-outline-danger mx-2">
+                                <a href="{{ route('product.delete', $model->id) }}" class="btn btn-outline-danger mx-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
                                         <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
@@ -121,37 +136,65 @@
                                     </svg>
                                 </button>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="editModal{{ $model->id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ $model->id }}" aria-hidden="true">
+                                <!-- Edit Modal -->
+                                <div class="modal fade" id="editModal{{ $model->id }}" tabindex="-1" aria-labelledby="editModalLabel{{ $model->id }}" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel{{ $model->id }}">Edit User</h1>
+                                                <h1 class="modal-title fs-5" id="editModalLabel{{ $model->id }}">Edit Product</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
 
-                                            <!-- Update Form -->
-                                            <form action="{{ route('user.update', $model->id) }}" method="POST">
+                                            <form action="{{ route('product.update', $model->id) }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="modal-body">
+
                                                     <label for="">Name</label>
                                                     <input type="text" name="name" value="{{ $model->name }}" class="form-control">
-                                                    @error('name') <span class="text-danger">{{$message}}</span> @enderror
+                                                    @error('name')
+                                                    <span class="text-danger">{{$message}}</span><br>
+                                                    @enderror
 
-                                                    <label for="">Email</label>
-                                                    <input type="text" name="email" value="{{ $model->email }}" class="form-control">
-                                                    @error('email') <span class="text-danger">{{$message}}</span> @enderror
+                                                    <label for="">Description</label>
+                                                    <input type="text" name="description" value="{{ $model->description }}" class="form-control">
+                                                    @error('description')
+                                                    <span class="text-danger">{{$message}}</span><br>
+                                                    @enderror
 
-                                                    <label for="">Password</label>
-                                                    <input type="password" name="password" class="form-control">
-                                                    @error('password') <span class="text-danger">{{$message}}</span> @enderror
+                                                    <label for="">Count</label>
+                                                    <input type="text" name="count" value="{{ $model->count }}" class="form-control">
+                                                    @error('count')
+                                                    <span class="text-danger">{{$message}}</span><br>
+                                                    @enderror
 
-                                                    <label for="">Role</label>
-                                                    <select name="role" class="form-control">
-                                                        <option value="user" {{ $model->role == 'user' ? 'selected' : '' }}>User</option>
-                                                        <option value="admin" {{ $model->role == 'admin' ? 'selected' : '' }}>Admin</option>
+                                                    <label for="">Price</label>
+                                                    <input type="text" name="price" value="{{ $model->price }}" class="form-control">
+                                                    @error('price')
+                                                    <span class="text-danger">{{$message}}</span><br>
+                                                    @enderror
+
+                                                    <label for="">Image</label>
+                                                    <input type="file" name="image" class="form-control" value="{{ old($model->image) }}">
+                                                    @if ($model->image)
+                                                    <img src="{{ asset($model->image) }}" width="100" class="mt-2">
+                                                    @endif
+                                                    @error('image')
+                                                    <span class="text-danger">{{$message}}</span><br>
+                                                    @enderror
+
+                                                    <label for="">Category</label>
+                                                    <select name="category_id" class="form-control">
+                                                        @foreach ($categories as $category)
+                                                        <option value="{{ $category->id }}" {{ $model->category_id == $category->id ? 'selected' : '' }}>
+                                                            {{ $category->name }}
+                                                        </option>
+                                                        @endforeach
                                                     </select>
+                                                    @error('category_id')
+                                                    <span class="text-danger">{{$message}}</span><br>
+                                                    @enderror
+
                                                 </div>
 
                                                 <div class="modal-footer">
@@ -159,9 +202,11 @@
                                                     <button type="submit" class="btn btn-primary">Update</button>
                                                 </div>
                                             </form>
+
                                         </div>
                                     </div>
                                 </div>
+
                         </td>
                     </tr>
                     @endforeach

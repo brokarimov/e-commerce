@@ -39,8 +39,16 @@ class CategoryController extends Controller
     {
         if ($category->status == 1) {
             $category->status = 2;
+            foreach ($category->products as $product) {
+                $product->status = 2;
+                $product->save();
+            }
         } else {
             $category->status = 1;
+            foreach ($category->products as $product) {
+                $product->status = 1;
+                $product->save();
+            }
         }
         $category->save();
         return back();

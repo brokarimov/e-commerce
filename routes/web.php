@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Middleware\Check;
 use Illuminate\Support\Facades\Route;
@@ -34,4 +35,12 @@ Route::middleware(Check::class)->group(function () {
     Route::put('/category/{category}', [CategoryController::class, 'update'])->name('category.update');
     Route::get('/category-search', [CategoryController::class, 'search'])->name('category.search');
     Route::get('/category-status/{category}', [CategoryController::class, 'status'])->name('category.status');
+
+    // Products   
+    Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+    Route::post('/product', [ProductController::class, 'store'])->name('product.store');
+    Route::get('/product/{product}', [ProductController::class, 'delete'])->name('product.delete');
+    Route::put('/product/{product}', [ProductController::class, 'update'])->name('product.update');
+    Route::get('/product-search', [ProductController::class, 'search'])->name('product.search');
+    Route::get('/product-status/{product}', [ProductController::class, 'status'])->name('product.status');
 });
