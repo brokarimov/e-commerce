@@ -70,13 +70,19 @@
                 </div>
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <li class="nav-item">
+                        <li class="nav-item">
                             <a href="{{route('user.index')}}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>Users</p>
                             </a>
                         </li>
-                        
+                        <li class="nav-item">
+                            <a href="{{route('category.index')}}" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>Categories</p>
+                            </a>
+                        </li>
+
                         <li class="nav-item">
                             <a href="{{route('logout')}}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
