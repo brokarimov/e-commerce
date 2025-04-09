@@ -27,6 +27,7 @@ Route::middleware(Check::class)->group(function () {
     Route::put('/user/{user}', [UserController::class, 'update'])->name('user.update');
     Route::get('/users/search', [UserController::class, 'search'])->name('user.search');
     Route::get('/user-status/{user}', [UserController::class, 'status'])->name('user.status');
+    Route::get('/user-view/{user}', [UserController::class, 'view'])->name('user.view');
 
     // Categories   
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
@@ -43,4 +44,5 @@ Route::middleware(Check::class)->group(function () {
     Route::put('/product/{product}', [ProductController::class, 'update'])->name('product.update');
     Route::get('/product-search', [ProductController::class, 'search'])->name('product.search');
     Route::get('/product-status/{product}', [ProductController::class, 'status'])->name('product.status');
+    Route::get('/product-view/{product}', [ProductController::class, 'view'])->name('product.view');
 });

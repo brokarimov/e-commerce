@@ -27,7 +27,7 @@
                         <label for="">Name</label>
                         <input type="text" name="name" placeholder="Name" class="form-control">
                         @error('name')
-                        <span class="text-danger">{{$message}}</span>
+                        <span class="text-danger">{{$message}}</span><br>
                         @enderror
                         
                     </div>
@@ -103,7 +103,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel{{ $model->id }}">Edit User</h1>
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel{{ $model->id }}">Edit Category</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
 
@@ -114,7 +114,7 @@
                                                 <div class="modal-body">
                                                     <label for="">Name</label>
                                                     <input type="text" name="name" value="{{ $model->name }}" class="form-control">
-                                                    @error('name') <span class="text-danger">{{$message}}</span> @enderror
+                                                    @error('name') <span class="text-danger">{{$message}}</span><br> @enderror
 
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

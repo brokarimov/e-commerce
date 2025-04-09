@@ -61,4 +61,8 @@ class CategoryController extends Controller
 
         return view('pages.category.category-index', ["models" => $models]);
     }
+
+    
 }
+
+

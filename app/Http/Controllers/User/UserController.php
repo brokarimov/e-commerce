@@ -57,4 +57,9 @@ class UserController extends Controller
 
         return view('pages.user.user-index', ["models" => $models]);
     }
+
+    public function view(User $user)
+    {
+        return view('pages.user.user-view', ["model" => $user]);
+    }
 }

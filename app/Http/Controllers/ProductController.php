@@ -80,4 +80,10 @@ class ProductController extends Controller
 
         return view('pages.category.category-index', ["models" => $models]);
     }
+
+    public function view(Product $product)
+    {
+        $categories = Category::all();
+        return view('pages.product.product-view', ["model" => $product, 'categories' => $categories]);
+    }
 }
